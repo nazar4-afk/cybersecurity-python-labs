@@ -1,0 +1,10 @@
+[
+    {
+        "event": "login",
+        "user": "m_verstappen",
+        "result": "success",
+        "timestamp": "2026-09-13 17:21:38",
+        "args": [],
+        "kwargs": {}
+    }
+]
