@@ -19,9 +19,6 @@ resources = [
 security_levels = ("Sandbox", "Development", "Secure", "Production Critical")
 blocked_users = {"sandbox_env", "pipeline_breach", "automation_fail"}
 
-resources_with_name = [(name, security_levels[i - 1]) for name, i in resources]
-print(resources_with_name)  
-
 
 def check_access(user, resources_level):
     if user not in users:
@@ -34,12 +31,15 @@ def check_access(user, resources_level):
         return False, "Insufficient clearance"
     return True, ""
 
-for user in users:
-    print("\n")
-    for resources_name, resources_level in resources:
-        access, reason = check_access(user, resources_level)
-        if access:
-            print(f"user=[{user}] resource=[{resources_name}] -> ALLOW")
-        else:
-            print(f"user=[{user}] resource=[{resources_name}] -> DENY({reason})")
-       
+def main():
+    resources_with_name = [(name, security_levels[i - 1]) for name, i in resources]
+    print(resources_with_name)  
+    
+    for user in users:
+        print("\n")
+        for resources_name, resources_level in resources:
+            access, reason = check_access(user, resources_level)
+            if access:
+                print(f"user=[{user}] resource=[{resources_name}] -> ALLOW")
+            else:
+                print(f"user=[{user}] resource=[{resources_name}] -> DENY({reason})")

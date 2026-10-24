@@ -100,13 +100,14 @@ def login(username: str, password: str) -> bool:
     if not username or not password:
         raise ValueError
     hashpass = generate_hash(password, SALT)
+    user_bd = red_user()
     for username_bd, hash_bd in user_bd:
         if username_bd == username and hash_bd == hashpass:
             return True
     return False
 
 
-if __name__ == "__main__":
+def main():
     try:
         create_users(users_to_register)
         user_bd = red_user()
@@ -117,3 +118,5 @@ if __name__ == "__main__":
         print(tabulate(user_bd, headers=["Логін", "MD5"], tablefmt="grid"))
     except (OSError, FileNotFoundError, PermissionError, ValidationError, ValueError) as error:
         print(error)
+
+

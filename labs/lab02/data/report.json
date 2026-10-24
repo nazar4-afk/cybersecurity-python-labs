@@ -1,0 +1,16 @@
+{
+    "total_valid": 8,
+    "total_invalid": 3,
+    "spoofing_alerts": [
+        {
+            "mac_spoofing": "DE:AD:BE:EF:00:01",
+            "ip_associated": [
+                "192.168.1.20",
+                "192.168.1.21",
+                "192.168.1.22"
+            ],
+            "severity": "CRITICAL",
+            "description": "POSSIBLE MAN-IN-THE-MIDDLE / ARP-SPOOFING ATTACK IN PROGRESS!"
+        }
+    ]
+}

@@ -6,5 +6,53 @@
         "timestamp": "2026-09-13 17:21:38",
         "args": [],
         "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "j_gounon",
+        "result": "success",
+        "timestamp": "2026-09-14 14:19:29",
+        "args": [],
+        "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "j_gounon",
+        "result": "success",
+        "timestamp": "2026-09-20 22:42:28",
+        "args": [],
+        "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "c_leclerc",
+        "result": "success",
+        "timestamp": "2026-09-21 12:06:28",
+        "args": [],
+        "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "l_vanthoor",
+        "result": "success",
+        "timestamp": "2026-09-21 12:17:54",
+        "args": [],
+        "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "l_hamilton",
+        "result": "success",
+        "timestamp": "2026-09-21 12:31:19",
+        "args": [],
+        "kwargs": {}
+    },
+    {
+        "event": "login",
+        "user": "j_gounon",
+        "result": "success",
+        "timestamp": "2026-09-21 12:31:55",
+        "args": [],
+        "kwargs": {}
     }
 ]
