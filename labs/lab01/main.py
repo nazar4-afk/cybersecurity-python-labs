@@ -1,16 +1,15 @@
 import os
 import sys
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                             '../../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from labs.lab01 import task1, task2, task3
 
 
 def main():
     while True:
         number = int(
-            input(
-                "Введіть номер задавння (введіть 0 щоб завершити перегляд): "))
+            input("Введіть номер задавння (введіть 0 щоб завершити перегляд): ")
+        )
         if number == 1:
             print("Завдання 1")
             task1.main()

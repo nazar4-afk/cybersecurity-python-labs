@@ -6,8 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 
 ITERATION = 100_000
-PATTERN_EMAIL = re.compile(
-    r"^[a-zA-Z][a-zA-Z0-9_]{2,63}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+PATTERN_EMAIL = re.compile(r"^[a-zA-Z][a-zA-Z0-9_]{2,63}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
 
 
 class User:
@@ -112,8 +111,8 @@ class AuditLog:
 
     def add_log(self, username: str, action: str) -> None:
         entry = LogEntry(
-            timestamp=datetime.now(timezone.utc),
-            username=username, action=action)
+            timestamp=datetime.now(timezone.utc), username=username, action=action
+        )
         self.entries.append(entry)
 
     def show_all(self) -> None:
@@ -130,8 +129,7 @@ class AuditLog:
 class UserAccount:
     SESSION_TIMEOUT_SEC = 900
 
-    def __init__(self, user: User, session: Session = None,
-                 audit_log: AuditLog = None):
+    def __init__(self, user: User, session: Session = None, audit_log: AuditLog = None):
         self.user = user
         self.session = session
         self.audit_log = audit_log if audit_log is not None else AuditLog()
@@ -172,8 +170,7 @@ class UserAccount:
         if key not in allowed_keys:
             raise KeyError(f"Невідомий ключ: {key}")
 
-        keyword_dictionary = {"user": User,
-                              "session": Session, "audit_log": AuditLog}
+        keyword_dictionary = {"user": User, "session": Session, "audit_log": AuditLog}
 
         if not isinstance(value, keyword_dictionary[key]):
             raise TypeError(

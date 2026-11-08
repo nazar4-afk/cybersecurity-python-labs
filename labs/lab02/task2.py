@@ -38,8 +38,9 @@ def parse_arp_file(file_path: Path) -> tuple[list[ArpEntry], int]:
     with open(file_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
-    start_index = 1 if lines and (
-        "IP" in lines[0].upper() or "MAC" in lines[0].upper()) else 0
+    start_index = (
+        1 if lines and ("IP" in lines[0].upper() or "MAC" in lines[0].upper()) else 0
+    )
 
     for line in lines[start_index:]:
         if not line.strip():
@@ -70,10 +71,7 @@ def detect_spoofing(entries: list[ArpEntry]) -> list[ArpSpoofing]:
 
     for mac, ip in mac_to_ip.items():
         if len(ip) > 1:
-            attack.append(ArpSpoofing(
-                mac_spoofing=mac,
-                ip_associated=sorted(ip)
-            ))
+            attack.append(ArpSpoofing(mac_spoofing=mac, ip_associated=sorted(ip)))
 
     return attack
 
@@ -85,8 +83,8 @@ def setup_logging(log_file: str):
         format=log_format,
         handlers=[
             logging.StreamHandler(),
-            logging.FileHandler(log_file, encoding="utf-8")
-        ]
+            logging.FileHandler(log_file, encoding="utf-8"),
+        ],
     )
 
 
@@ -94,15 +92,18 @@ def parse_arguments():
     parser = argparse.ArgumentParser(
         description="Варіант 11: Аудитор ARP-таблиць та виявлення ARP-Spoofing"
     )
-    parser.add_argument("--arp-file", required=True,
-                        help="Шлях до файлу з ARP-таблицею (CSV)")
-    parser.add_argument("--output-json", required=True,
-                        help="Шлях для збереження JSON-звіту")
     parser.add_argument(
-        "--detect-spoofing", action="store_true",
-        help="Увімкнути пошук ARP-Spoofing")
-    parser.add_argument("--log-file", default="arp_audit.log",
-                        help="Шлях до файлу логування")
+        "--arp-file", required=True, help="Шлях до файлу з ARP-таблицею (CSV)"
+    )
+    parser.add_argument(
+        "--output-json", required=True, help="Шлях для збереження JSON-звіту"
+    )
+    parser.add_argument(
+        "--detect-spoofing", action="store_true", help="Увімкнути пошук ARP-Spoofing"
+    )
+    parser.add_argument(
+        "--log-file", default="arp_audit.log", help="Шлях до файлу логування"
+    )
 
     return parser.parse_args()
 
@@ -136,11 +137,15 @@ def main():
             for alert in alerts:
                 print("[ALERT] MAC Address Duplicate Conflict!")
                 print(
-                    f"MAC Address: {alert.mac_spoofing} associated with MULTIPLE IP addresses:")
+                    f"MAC Address: {alert.mac_spoofing} associated with MULTIPLE IP addresses:"
+                )
 
                 for ip in alert.ip_associated:
-                    tag = "(Default Gateway)" if ip.endswith(
-                        ".1") else "(Suspicious Host)"
+                    tag = (
+                        "(Default Gateway)"
+                        if ip.endswith(".1")
+                        else "(Suspicious Host)"
+                    )
                     print(f"  - {ip} {tag}")
 
                 print(f"  -> {alert.description}")
@@ -155,7 +160,7 @@ def main():
         report = {
             "total_valid": len(valid_entries),
             "total_invalid": invalid_count,
-            "spoofing_alerts": [asdict(alert) for alert in alerts]
+            "spoofing_alerts": [asdict(alert) for alert in alerts],
         }
 
         output_path = Path(args.output_json)

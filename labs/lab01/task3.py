@@ -8,8 +8,7 @@ import sys
 
 from tabulate import tabulate
 
-sys.path.append(os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../../")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 
 from shared.student import VARIANT_NUMBER
 
@@ -52,8 +51,7 @@ def create_user(username, password):
 def create_users(users_list):
     os.makedirs("labs/lab01/data", exist_ok=True)
 
-    uxxx = [create_user(username, password)
-            for username, password in users_list]
+    uxxx = [create_user(username, password) for username, password in users_list]
 
     with open("labs/lab01/data/users.csv", mode="w", newline="", encoding="utf-8") as f:
         csv.writer(f).writerows(uxxx)
@@ -74,8 +72,10 @@ def log_event(func):
         result = "success" if reusltquick else "failure"
 
         logs = []
-        if os.path.exists("labs/lab01/data/log.json") and os.path.getsize(
-                "labs/lab01/data/log.json") > 0:
+        if (
+            os.path.exists("labs/lab01/data/log.json")
+            and os.path.getsize("labs/lab01/data/log.json") > 0
+        ):
             with open("labs/lab01/data/log.json", "r", encoding="utf-8") as f:
                 logs = json.load(f)
         log_enter = {
@@ -84,7 +84,7 @@ def log_event(func):
             "result": result,
             "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),  # noqa: DTZ005
             "args": list(args),
-            "kwargs": kwargs
+            "kwargs": kwargs,
         }
         logs.append(log_enter)
 
@@ -92,6 +92,7 @@ def log_event(func):
             json.dump(logs, f, indent=4, ensure_ascii=False)
 
         return reusltquick
+
     return wkladena
 
 
@@ -116,7 +117,11 @@ def main():
         login(rand_user, rand_pass)
 
         print(tabulate(user_bd, headers=["Логін", "MD5"], tablefmt="grid"))
-    except (OSError, FileNotFoundError, PermissionError, ValidationError, ValueError) as error:
+    except (
+        OSError,
+        FileNotFoundError,
+        PermissionError,
+        ValidationError,
+        ValueError,
+    ) as error:
         print(error)
-
-

@@ -2,6 +2,7 @@ import time
 
 from labs.lab02.task1 import Admin, User, UserAccount
 
+
 def demo():
     # 1. Валідація Email
     print("1. Валідація Email")
@@ -13,7 +14,6 @@ def demo():
         # Спроба встановити невалідний email
         user.email = "invalid-email-without-domain"
     except ValueError as e:
-
         print(f"Спіймали очікувану помилку: {e}")
 
     # Встановлюємо правильний email
@@ -39,17 +39,14 @@ def demo():
 
     # Невдалий вхід
     account.login("alice", "wrong_password", "192.168.1.10")
-    print(
-        f"Аутентифікація після невдалого входу: {account.is_authenticated()}")
+    print(f"Аутентифікація після невдалого входу: {account.is_authenticated()}")
 
     # Успішний вхід
     account.login("alice", "secure_password_123", "192.168.1.10")
-    print(
-        f"Аутентифікація після успішного входу: {account.is_authenticated()}")
+    print(f"Аутентифікація після успішного входу: {account.is_authenticated()}")
 
     # Доступ через магічні методи (як до словника)
-    print(
-        f"Отримання username через account['user']: {account['user'].username}")
+    print(f"Отримання username через account['user']: {account['user'].username}")
 
     # 4. Завершення сеансу за таймаутом
     print("\n4. Завершення сеансу за таймаутом")
